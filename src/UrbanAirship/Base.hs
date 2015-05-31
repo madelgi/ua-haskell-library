@@ -1,8 +1,5 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE OverloadedStrings #-}
-
 -------------------------------------------------------------------------------
--- Module    : Airship
+-- Module    : UrbanAirship.Base
 -- Maintener : maxdelgiudice@gmail.com
 -- Stability : Experimental
 -- Summary   : The base client module -- contains data types and support routines
@@ -10,6 +7,10 @@
 --
 -------------------------------------------------------------------------------
 -- {{{ Module declaration and imports
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE OverloadedStrings #-}
+
+
 module UrbanAirship.Base
    ( AConfig(..)
    , AResponseCode(..)
@@ -132,7 +133,7 @@ runAirshipT config airship =
   runErrorT . liftM fst . (`runStateT` config) .  unAirshipT $ airship
 
 -------------------------------------------------------------------------------
--- HTTP Requests
+-- Tools for querying the Urban Airship API.
 --
 -------------------------------------------------------------------------------
 
@@ -149,7 +150,7 @@ initAReq  = ARequest
    , aBody        = ""
    }
 
--- | Query the urbanairship API.
+-- | Query the Urban Airship API.
 --
 -- > let config = AConfig "appKey" "masterSecret"
 -- > runAirshipT config $
@@ -179,7 +180,7 @@ queryOptions request = CurlUserAgent agent : CurlHttpHeaders httpHeaders
                    PUT      -> [CurlCustomRequest "PUT"]
                    DELETE   -> [CurlCustomRequest "DELETE"]
 
--- |
+-- | Takes an AConfig and an ARequest, and returns a valid URI.
 prepRq :: AConfig -> ARequest -> URI
 prepRq config request = uri { uriPath = (intercalate "/" endpt) }
    where endpt = (uriPath uri) : (map T.unpack $ aEndpoint request)

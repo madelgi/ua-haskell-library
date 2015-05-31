@@ -24,12 +24,9 @@ This is a wrapper for API v3.
 ## Functionality
 
 Currently, this wrapper is push-only. All of the bells and whistles (actions, interactive notifications, etc)
-will be added as I feel like it. In lieu of complete documentation, let's look at a specific request and
-break it down piece by piece:
-
+will be added as I feel like it.
 
 ## Usage
-
 
 
 ### Example Request

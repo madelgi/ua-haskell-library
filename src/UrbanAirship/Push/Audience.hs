@@ -1,9 +1,13 @@
+-------------------------------------------------------------------------------
+-- Module    : UrbanAirship.Push.Audience
+-- Maintener : maxdelgiudice@gmail.com
+-- Stability : Experimental
+-- Summary   : Contains the base audience data types and ToJSON instances.
+--
+-------------------------------------------------------------------------------
 {-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE OverloadedStrings          #-}
---------------------------------------------------------------------------------
--- Module: UrbanAirship.Push.Audience
---
---------------------------------------------------------------------------------
+
 module UrbanAirship.Push.Audience
    ( Audience(..)
    , AtomicSelector(..)
@@ -16,24 +20,29 @@ import           Data.Text           ( Text )
 -- Models
 --
 --------------------------------------------------------------------------------
-data Audience = AND [Audience]      -- ^ A list of audience constructors, connected with an AND clause
-              | OR  [Audience]      -- ^ A list of audience constructors, connected with an OR clause
-              | NOT Audience        -- ^ Negation of a given audience constructor
-              | AS  AtomicSelector  -- ^ An atomic selector
+
+-- | Represents the `audience` key. Can be a [possibly negated] `AtomicSelector`,
+--   or a list of Audience types linked together by a boolean operator (`AND` or
+--   `OR`).
+data Audience = AND [Audience]
+              | OR  [Audience]
+              | NOT Audience
+              | AS  AtomicSelector
                 deriving ( Show )
 
-data AtomicSelector = All                 -- ^ Your entire audience
-                    | IosChannel     Text -- ^ An iOS Channel
-                    | AndroidChannel Text -- ^ An Android Channel
-                    | AmazonChannel  Text -- ^ An Amazon Channel
-                    | DeviceToken    Text -- ^ A Device Token
-                    | DevicePin      Text -- ^ A BlackBerry PIN
-                    | Apid           Text -- ^ An APID
-                    | Wns            Text -- ^ Unique identifier used to target a Windows device
-                    | Mpns           Text -- ^ Unique identifier used to target a Windows Phone device
-                    | Tag            Text -- ^ A Tag
-                    | Alias          Text -- ^ TODO
-                    | Segment        Text -- ^ TODO
+-- | Represents an atomic selector.
+data AtomicSelector = All
+                    | IosChannel     Text
+                    | AndroidChannel Text
+                    | AmazonChannel  Text
+                    | DeviceToken    Text
+                    | DevicePin      Text
+                    | Apid           Text
+                    | Wns            Text
+                    | Mpns           Text
+                    | Tag            Text
+                    | Alias          Text
+                    | Segment        Text
                       deriving ( Show )
 
 instance ToJSON Audience where

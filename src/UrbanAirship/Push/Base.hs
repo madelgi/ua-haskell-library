@@ -1,11 +1,14 @@
+-------------------------------------------------------------------------------
+-- Module    : UrbanAirship.Push.Base
+-- Maintener : maxdelgiudice@gmail.com
+-- Stability : Experimental
+-- Summary   : Contains the support routines for sending pushes through the
+--             `/api/push/` endpoint.
+--
+-------------------------------------------------------------------------------
+-- {{{ Module declaration and imports
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE OverloadedStrings #-}
---------------------------------------------------------------------------------
--- Module:  UrbanAirship.Push.Base
--- Summary: For sending pushes through the /api/push endpoint
---
---------------------------------------------------------------------------------
--- {{{ Module declaration and imports
 module UrbanAirship.Push.Base
    ( Push(..)
    , Notification(..)
@@ -31,6 +34,8 @@ import qualified UrbanAirship.Push.Audience as PA
 -- Data Types and ToJSON instances
 --
 -------------------------------------------------------------------------------
+
+-- | Represents a device type.
 data DeviceType = Ios
                 | Android
                 | Amazon
@@ -39,17 +44,18 @@ data DeviceType = Ios
                 | Blackberry
                   deriving ( Show )
 
--- | The `device_types` object
+-- | Represents the `device_types` key-value pair.
 data DeviceTypes = All
                  | DTs [DeviceType]
                    deriving ( Show )
 
--- | The notification object
+-- | Represents the notification object. Currently only supports the `alert` key.
+--   (TODO update)
 data Notification = Notification
    { alert   :: T.Text
    } deriving ( Show )
 
--- | The push object
+-- | Represents the push object.
 data Push = Push
    { notification    :: Notification
    , audience        :: PA.Audience
@@ -83,12 +89,14 @@ instance ToJSON DeviceTypes where
       DTs xs -> toJSON xs
 
 -------------------------------------------------------------------------------
--- |
--- Creates
+-- Create a push request.
 --
 -------------------------------------------------------------------------------
+
+-- | Send an API request to the `/api/push/` endpoint.
 sendPush :: MonadIO m => Push -> AirshipT m ()
 sendPush psh = query_ (pushRq []) { aMethod = POST, aData = T.pack . unpack $ encode psh }
 
+-- | Builds the base request for a call to the `/api/push/` endpoint.
 pushRq :: [T.Text] -> ARequest
 pushRq pcs = initAReq { aEndpoint = "push":pcs }

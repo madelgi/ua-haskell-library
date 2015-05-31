@@ -1,3 +1,12 @@
+-------------------------------------------------------------------------------
+-- Module    : UrbanAirship.Utils
+-- Maintener : maxdelgiudice@gmail.com
+-- Stability : Experimental
+-- Summary   : A module containing utility functions, mostly related to parsing
+--             JSON.
+--
+-------------------------------------------------------------------------------
+
 module UrbanAirship.Utils
    ( omitNulls
    ) where
