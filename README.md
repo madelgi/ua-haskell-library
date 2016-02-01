@@ -6,16 +6,6 @@ This is an **UNOFFICIAL** Haskell wrapper for
 [Urban Airship API v3](http://docs.urbanairship.com/api/ua.html).
 
 
-### Unofficial?? But you work for them!
-
-Yes, as a technical writer. Creating safe, production-ready api wrappers isn't necessarily my
-domain of expertise. If you happen to be the one Urban Airship customer that is really interested
-in using Haskell to integrate with the UA API:
-
-* Hi! Nice to meet you.
-* Proceed with extreme caution, plz.
-
-
 ## Requirements
 
 This is a wrapper for API v3.
@@ -23,10 +13,24 @@ This is a wrapper for API v3.
 
 ## Functionality
 
-Currently, this wrapper is push-only. All of the bells and whistles (actions, interactive notifications, etc)
-will be added as I feel like it.
+Currently, the wrapper is push-only. All of the bells and whistles (actions, interactive
+notifications, etc) will be added as I feel like it.
+
 
 ## Usage
+
+Here's what you do to get up and running:
+
+```
+$ git clone https://github.com/madelgi/ua-haskell-library
+$ cd ua-haskell-library
+$ cabal sandbox init
+$ cabal install --only-dependencies
+$ cabal configure
+$ cabal repl
+```
+
+This will start up an instance of GHCI with the Haskell library.
 
 
 ### Example Request
@@ -36,6 +40,7 @@ and `your_mastersecret_here` items with your actual app key and master secret.
 
 ```haskell
 module TestPush where
+
 import           Network.Curl
 import           Network.URI                  ( uriToString )
 import           Data.Aeson                   ( encode )
@@ -82,10 +87,9 @@ main  = do
 
 ```
 
-## TODOs
+## TODOS
 
-COMING SOON
-
-## History
-
-COMING SOON
+- [ ] Add tests
+- [ ] Fix versioning wonkiness
+- [ ] Update from Error to Control.Monad.Trans.Except
+- [ ] Add other API features

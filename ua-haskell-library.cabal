@@ -23,9 +23,9 @@ Test-Suite tests
       Push.TestAudience
 
    build-depends:
-        base    >=4.7 && <4.8
-      , text    ==1.1.1.3
-      , aeson   ==0.8.0.0
+        base
+      , text
+      , aeson
 --      , HTTP
       , mtl
 --      , curl
@@ -42,15 +42,16 @@ library
 
   -- other-modules:
   build-depends:
-        base    >=4.7 && <4.8
-      , text    ==1.1.1.3
-      , aeson   ==0.8.0.0
+        base
+      , text
+      , aeson
       , HTTP
       , mtl
       , base64-bytestring
       , bytestring
       , unordered-containers
       , curl
+      , parsec
       , http-types
       , network-uri
       , HUnit

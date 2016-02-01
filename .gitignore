@@ -1,0 +1,6 @@
+src/Main.hs
+dist/
+src/UrbanAirship/Reports/
+*.swp
+.cabal-sandbox/
+cabal.sandbox.config
