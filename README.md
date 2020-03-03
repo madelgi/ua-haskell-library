@@ -2,24 +2,25 @@
 
 ## About
 
-This is an **UNOFFICIAL** Haskell wrapper for
+This is an Unofficial Haskell wrapper for
 [Urban Airship API v3](http://docs.urbanairship.com/api/ua.html).
-
-
-## Requirements
-
-This is a wrapper for API v3.
 
 
 ## Functionality
 
-Currently, the wrapper is push-only. All of the bells and whistles (actions, interactive
-notifications, etc) will be added as I feel like it.
-
+Currently, the wrapper is push-only.
 
 ## Usage
 
-Here's what you do to get up and running:
+### Installation
+
+Before installing this package, you need the development files for `curl`. If you are using Ubuntu, you can execute:
+
+```
+$ sudo apt-get install libcurl4-gnutls-dev
+```
+
+To install the `ua-haskell-library`, execute the following commands.
 
 ```
 $ git clone https://github.com/madelgi/ua-haskell-library
@@ -35,8 +36,7 @@ This will start up an instance of GHCI with the Haskell library.
 
 ### Example Request
 
-Until I can document this more fully, here's a complete request. Replace the `your_appkey_here`
-and `your_mastersecret_here` items with your actual app key and master secret.
+Replace `your_appkey_here` and `your_mastersecret_here` items with your actual app key and master secret.
 
 ```haskell
 module TestPush where
@@ -90,6 +90,6 @@ main  = do
 ## TODOS
 
 - [ ] Add tests
-- [ ] Fix versioning wonkiness
+- [ ] Fix versioning issues
 - [ ] Update from Error to Control.Monad.Trans.Except
 - [ ] Add other API features
